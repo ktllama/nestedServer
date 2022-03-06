@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// require('mongoose-currency').loadType(mongoose);
-// const Currency = mongoose.Types.Currency;
+require('mongoose-currency').loadType(mongoose);
+const Currency = mongoose.Types.Currency;
 
 const roomSchema = new Schema({
     //would all these not be required because the user may not be selling a room?
     price: {
-        type: Number,
+        type: Currency,
         required: false,
         min: 0
     },
