@@ -3,13 +3,16 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
+const config = require('./config');
+
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var accountsRouter = require('./routes/accounts');
 const userRouter = require('./routes/userRouter');
 
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/nested';
+const url = 'mongodb://localhost:27017/accounts';
 const connect = mongoose.connect(url, {
     useCreateIndex: true,
     useFindAndModify: false,
@@ -30,10 +33,16 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+//middleware functions used for session based auth
+app.use(passport.initialize());
+
+//user log in
+app.use('/', indexRouter);
+app.use('/accounts', accountsRouter);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/home', userRouter);
 app.use('/profile', userRouter);
 app.use('/browse-rooms', userRouter);
