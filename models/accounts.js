@@ -17,6 +17,6 @@ const accountsSchema = new Schema({
     }
 });
 
-// Accounts.plugin(passportLocalMongoose);
+accountsSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('Acoounts', accountsSchema);
+module.exports = mongoose.model('Accounts', accountsSchema);

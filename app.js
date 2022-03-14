@@ -12,7 +12,7 @@ var accountsRouter = require('./routes/accounts');
 const userRouter = require('./routes/userRouter');
 
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost:27017/accounts';
+const url = 'mongodb://localhost:27017/nested';
 const connect = mongoose.connect(url, {
     useCreateIndex: true,
     useFindAndModify: false,

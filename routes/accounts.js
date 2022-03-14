@@ -14,7 +14,7 @@ router.get('/', authenticate.verifyAccounts, authenticate.verifyAdmin, function(
 
 router.post('/create-account', (req, res) => {
     Accounts.register(
-        new Accounts({username: req.body.username}),
+        new User({username: req.body.username}),
         req.body.password,
         (err, Accounts) => {
             if (err) {
@@ -47,7 +47,7 @@ router.post('/create-account', (req, res) => {
 });
 
 router.post('/login', passport.authenticate('local'), (req, res) => {
-    const token = authenticate.getToken({_id: req.Accounts._id});
+    const token = authenticate.getToken({_id: req.accounts._id});
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json({success: true, token: token, status: 'You are successfully logged in!'});
